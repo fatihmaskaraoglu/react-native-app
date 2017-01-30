@@ -26,11 +26,22 @@ export default class Signup extends Component {
         <ScrollView style={styles.scroll}>
         <Image
            style={{width: 320, height: 50}}
-           source={{uri: 'https://drive.google.com/file/d/0B8Qn9aoKG8GfTGR4eE44N1RpdnM/view?usp=sharing'}}
+           source={{uri: 'http://www.miksinvest.com/img/miks_black_2.png'}}
          />
+         <Container>
+             <Button2
+                 label="Login sayfasına dön"
+                 styles={{button: styles.alignRight, label: styles.label}}
+                 onPress={this.navigate.bind(this)} />
+         </Container>
         </ScrollView>
       </View>
     );
+  }
+  navigate(){
+    this.props.navigator.push({
+      id:'Login',
+    });
   }
 }
 

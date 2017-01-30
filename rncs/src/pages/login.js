@@ -65,7 +65,7 @@ export default class Login extends Component {
   }
   navigate(){
     this.props.navigator.push({
-      title:'Signup',
+      id:'Signup',
     });
   }
   press() {
