@@ -49,6 +49,7 @@ export default class Signup extends Component {
 
 const styles = StyleSheet.create({
   scroll: {
+      flex :1,
       backgroundColor: '#ffffff',
       padding: 30,
       flexDirection: 'column'

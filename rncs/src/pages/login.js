@@ -26,8 +26,8 @@ export default class Login extends Component {
       <View style={{flex: 1}}>
         <ScrollView style={styles.scroll}>
         <Image
-           style={{width: 320, height: 50}}
-           source={{uri: 'https://drive.google.com/file/d/0B8Qn9aoKG8GfTGR4eE44N1RpdnM/view?usp=sharing'}}
+           style={{width: 320, height: 100}}
+           source={{uri: 'http://www.miksinvest.com/img/miks_black_2.png'}}
          />
           <Container>
               <Button2
@@ -54,11 +54,14 @@ export default class Login extends Component {
                   styles={{button: styles.alignRight, label: styles.label}}
                   onPress={this.press.bind(this)} />
           </Container>
+            <Container>
           <Button
               onPress={this.homepage.bind(this)}
               title="Giriş Yap"
               color="#00ffff"
            />
+           </Container>
+          <Text> "miks" </Text>
         </ScrollView>
       </View>
     );
