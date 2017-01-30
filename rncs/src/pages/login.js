@@ -12,12 +12,13 @@ import {
   Button,
   Image,
   Linking,
+  Navigator,
+  Link,
+  props,
   ScrollView
 } from 'react-native';
+import Signup from './Signup';
 
-const onButtonPress = () => {
-    Linking.openURL('https://www.google.com.tr/');
-};
 
 export default class Login extends Component {
   render() {
@@ -32,7 +33,7 @@ export default class Login extends Component {
               <Button2
                   label="Henüz hesabınız yok mu? Hemen Kayıt Olun."
                   styles={{button: styles.alignRight, label: styles.label}}
-                  onPress={this.press.bind(this)} />
+                  onPress={this.navigate.bind(this)} />
           </Container>
           <Container>
             <Label text="E-posta adresi" />
@@ -54,21 +55,25 @@ export default class Login extends Component {
                   onPress={this.press.bind(this)} />
           </Container>
           <Button
-              onPress={onButtonPress}
+              onPress={this.homepage.bind(this)}
               title="Giriş Yap"
               color="#00ffff"
            />
         </ScrollView>
       </View>
     );
-
+  }
+  navigate(){
+    this.props.navigator.push({
+      title:'Signup',
+    });
   }
   press() {
-      this.props.navigator.push({
-      id: 'signup-page',
-      sceneConfig: Navigator.SceneConfigs.FloatFromBottom })
-  }
 
+  }
+  homepage(){
+
+  }
 }
 
 

@@ -15,4 +15,5 @@ export default class rncs extends Component {
 
 }
 
+
 AppRegistry.registerComponent('rncs', () => rncs);
