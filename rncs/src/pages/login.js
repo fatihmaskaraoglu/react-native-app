@@ -1,13 +1,93 @@
 import React, { Component } from 'react';
 import Container from '../components/Container';
-import Button from '../components/Button';
+import Button2 from '../components/Button';
 import Label from '../components/Label';
 import {
   StyleSheet,
   Text,
   View,
   TextInput,
+  Press,
+  Alert,
+  Button,
+  Image,
+  Linking,
   ScrollView
 } from 'react-native';
+
+const onButtonPress = () => {
+    Linking.openURL('https://www.google.com.tr/');
+};
+
+export default class Login extends Component {
+  render() {
+    return (
+      <View style={{flex: 1}}>
+        <ScrollView style={styles.scroll}>
+        <Image
+           style={{width: 320, height: 50}}
+           source={{uri: 'https://drive.google.com/file/d/0B8Qn9aoKG8GfTGR4eE44N1RpdnM/view?usp=sharing'}}
+         />
+          <Container>
+              <Button2
+                  label="Henüz hesabınız yok mu? Hemen Kayıt Olun."
+                  styles={{button: styles.alignRight, label: styles.label}}
+                  onPress={this.press.bind(this)} />
+          </Container>
+          <Container>
+            <Label text="E-posta adresi" />
+            <TextInput
+                style={styles.textInput}
+          />
+          </Container>
+          <Container>
+              <Label text="Şifre" />
+              <TextInput
+                  secureTextEntry={true}
+                  style={styles.textInput}
+              />
+          </Container>
+          <Container>
+              <Button2
+                  label="Şifremi unuttum"
+                  styles={{button: styles.alignRight, label: styles.label}}
+                  onPress={this.press.bind(this)} />
+          </Container>
+          <Button
+              onPress={onButtonPress}
+              title="Giriş Yap"
+              color="#00ffff"
+           />
+        </ScrollView>
+      </View>
+    );
+
+  }
+  press() {
+      this.props.navigator.push({
+      id: 'signup-page',
+      sceneConfig: Navigator.SceneConfigs.FloatFromBottom })
+  }
+
+}
+
+
+
+const styles = StyleSheet.create({
+  scroll: {
+      backgroundColor: '#ffffff',
+      padding: 30,
+      flexDirection: 'column'
+  },
+    label: {
+      color: '#0d8898',
+      fontSize: 20
+  },
+    alignRight: {
+      alignSelf: 'flex-end'
+  },
+});
+
+
 
 import Icon from 'react-native-vector-icons/FontAwesome';

@@ -5,7 +5,7 @@ import {
 
 import Login from './src/pages/Login';
 
-export default class ReactNativeCommonScreens extends Component {
+export default class rncs extends Component {
 
   render() {
     return (
@@ -15,4 +15,4 @@ export default class ReactNativeCommonScreens extends Component {
 
 }
 
-AppRegistry.registerComponent('ReactNativeCommonScreens', () => ReactNativeCommonScreens);
+AppRegistry.registerComponent('rncs', () => rncs);

@@ -17,7 +17,6 @@ const Button2 = (props) => {
 
     return (
         <TouchableHighlight
-            underlayColor="#ccc"
             onPress={props.onPress}
             style={[
                 props.noDefaultStyles ? '' : styles.button,
@@ -30,6 +29,7 @@ const Button2 = (props) => {
 
 const styles = StyleSheet.create({
     button: {
+        color="#841584"
         alignItems: 'center',
         justifyContent: 'center',
         padding: 20
