@@ -40,6 +40,7 @@ export default class Signup extends Component {
   }
   navigate(){
     this.props.navigator.push({
+      id:'Forapitry',
     });
   }
 }

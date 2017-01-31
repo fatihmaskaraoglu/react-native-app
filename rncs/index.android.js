@@ -9,6 +9,7 @@ import {
 
 import Login from './src/pages/Login';
 import Signup from './src/pages/Signup';
+import Forapitry from './src/pages/Forapitry';
 
 class rncs extends Component {
 
@@ -35,7 +36,9 @@ class rncs extends Component {
             return(
               <Signup navigator={navigator} title= "Signup"/>
           );
+          case 'Forapitry':
             return(
+              <Forapitry navigator={navigator} title= "Forapitry"/>
           );
         }
     }
