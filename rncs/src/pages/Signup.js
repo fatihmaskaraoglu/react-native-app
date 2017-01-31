@@ -30,7 +30,7 @@ export default class Signup extends Component {
          />
          <Container>
              <Button2
-                 label="Login sayfasına dön"
+                 label="API denemesine bak"
                  styles={{button: styles.alignRight, label: styles.label}}
                  onPress={this.navigate.bind(this)} />
          </Container>
@@ -40,7 +40,6 @@ export default class Signup extends Component {
   }
   navigate(){
     this.props.navigator.push({
-      id:'Login',
     });
   }
 }

@@ -35,6 +35,8 @@ class rncs extends Component {
             return(
               <Signup navigator={navigator} title= "Signup"/>
           );
+            return(
+          );
         }
     }
 }
