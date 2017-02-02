@@ -72,7 +72,7 @@ export default class Signup extends Component {
       <View style={{flex: 1}}>
         <ScrollView style={styles.scroll}>
         <Image
-           style={{width: 320, height: 50}}
+           style={{width: 320, height: 100}}
            source={{uri: 'http://www.miksinvest.com/img/miks_black_2.png'}}
          />
          <Container>
@@ -103,9 +103,15 @@ export default class Signup extends Component {
          <Container>
          <TouchableHighlight onPress={this.onLoginPressed.bind(this)} style={styles.button}>
          <Text style={styles.buttonText}>
-           Gönder
+           KAYIT OL
          </Text>
        </TouchableHighlight>
+
+       <Button2
+       label="Giriş yap Sayfasına Dön"
+       styles={{button: styles.alignCenter, label: styles.label}}
+       onPress={this.gologin.bind(this)} />
+
         </Container>
         </ScrollView>
       </View>
@@ -116,13 +122,20 @@ export default class Signup extends Component {
       id:'Forapitry',
     });
   }
-}
+  gologin(){
+      this.props.navigator.push({
+        id:'Login',
+      });
+  }
 
+
+
+
+}
 
 
 const styles = StyleSheet.create({
   scroll: {
-      flex :1,
       backgroundColor: '#ffffff',
       padding: 30,
       flexDirection: 'column'
@@ -134,6 +147,26 @@ const styles = StyleSheet.create({
     alignRight: {
       alignSelf: 'flex-end'
   },
+  alignCenter: {
+    alignSelf: 'center'
+},
+  buttonText: {
+   fontSize: 22,
+   color: '#008b8b',
+   alignSelf: 'center'
+ },
+ error: {
+    color: 'red',
+    paddingTop: 10
+  },
+  input: {
+   height: 50,
+   marginTop: 10,
+   padding: 4,
+   fontSize: 18,
+   borderWidth: 1,
+   borderColor: '#48bbec'
+ },
 });
 
 
