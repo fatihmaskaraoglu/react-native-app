@@ -35,6 +35,7 @@ export default class Signup extends Component {
   async onLoginPressed() {
       this.setState({showProgress: true})
       try {
+        //url will be changed when my server developper friend write get function
         let response = await fetch('http://192.168.1.233:8080/mobile', {
                                 method: 'POST',
                                 headers: {
@@ -76,6 +77,9 @@ export default class Signup extends Component {
            source={{uri: 'http://www.miksinvest.com/img/miks_black_2.png'}}
          />
          <Container>
+            <Text>
+            Hemen Ücretsiz Kayıt Olun!
+            </Text>
              <Button2
                  label="3.page"
                  styles={{button: styles.alignRight, label: styles.label}}

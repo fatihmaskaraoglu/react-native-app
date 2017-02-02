@@ -95,6 +95,9 @@ export default class Login extends Component {
                   label="Henüz hesabınız yok mu? Hemen Kayıt Olun."
                   styles={{button: styles.alignRight, label: styles.label}}
                   onPress={this.navigate.bind(this)} />
+            <Text>
+            HOŞGELDİNİZ!
+            </Text>
 
             <TextInput
               onChangeText={ (text)=> this.setState({email: text}) }
@@ -110,7 +113,7 @@ export default class Login extends Component {
 
               <Button2
                   label="Şifremi unuttum"
-                  styles={{button: styles.alignRight, label: styles.label}}
+                  styles={{button: styles.alignCenter, label: styles.label}}
                   onPress={this.press.bind(this)} />
 
             <TouchableHighlight onPress={this.onLoginPressed.bind(this)} style={styles.button}>
@@ -156,6 +159,9 @@ const styles = StyleSheet.create({
     alignRight: {
       alignSelf: 'flex-end'
   },
+  alignCenter: {
+    alignSelf: 'center'
+},
   buttonText: {
    fontSize: 22,
    color: '#008b8b',

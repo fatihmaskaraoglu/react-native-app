@@ -56,7 +56,7 @@ export default class Forapitry extends Component {
 
         <Container>
             <Button2
-                label="Login sayfasına dön"
+                label="Login sayfasına dön "
                 styles={{button: styles.alignRight, label: styles.label}}
                 onPress={this.navigate.bind(this)} />
         </Container>
