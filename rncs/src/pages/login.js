@@ -13,14 +13,78 @@ import {
   Image,
   Linking,
   Navigator,
+  TouchableHighlight,
+  AsyncStorage,
   Link,
   props,
   ScrollView
 } from 'react-native';
 import Signup from './Signup';
 
+const ACCESS_TOKEN = 'access_token';
+
 
 export default class Login extends Component {
+  constructor(){
+    super();
+
+    this.state = {
+      email: "",
+      password: "",
+      error: "",
+      showProgress: false,
+    }
+  }
+
+  storeToken(responseData){
+    AsyncStorage.setItem(ACCESS_TOKEN, responseData, (err)=> {
+      if(err){
+        console.log("an error");
+        throw err;
+      }
+      console.log("success");
+    }).catch((err)=> {
+        console.log("error is: " + err);
+    });
+  }
+
+
+  async onLoginPressed() {
+      this.setState({showProgress: true})
+      try {
+        let response = await fetch('https://afternoon-beyond-22141.herokuapp.com/api/login', {
+                                method: 'POST',
+                                headers: {
+                                  'Accept': 'application/json',
+                                  'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify({
+                                  session:{
+                                    email: this.state.email,
+                                    password: this.state.password,
+                                  }
+                                })
+                              });
+        let res = await response.text();
+        if (response.status >= 200 && response.status < 300) {
+            //Handle success
+            let accessToken = res;
+            console.log(accessToken);
+            //On success we will store the access_token in the AsyncStorage
+            this.storeToken(accessToken);
+            this.redirect('home');
+        } else {
+            //Handle error
+            let error = res;
+            throw error;
+        }
+      } catch(error) {
+          this.setState({error: error});
+          console.log("error " + error);
+          this.setState({showProgress: false});
+      }
+    }
+
   render() {
     return (
       <View style={{flex: 1}}>
@@ -36,17 +100,16 @@ export default class Login extends Component {
                   onPress={this.navigate.bind(this)} />
           </Container>
           <Container>
-            <Label text="E-posta adresi" />
-            <TextInput
-                style={styles.textInput}
-          />
-          </Container>
-          <Container>
-              <Label text="Şifre" />
-              <TextInput
-                  secureTextEntry={true}
-                  style={styles.textInput}
-              />
+          <TextInput
+          onChangeText={ (text)=> this.setState({email: text}) }
+          style={styles.input} placeholder="Email">
+        </TextInput>
+        <TextInput
+          onChangeText={ (text)=> this.setState({password: text}) }
+          style={styles.input}
+          placeholder="Password"
+          secureTextEntry={true}>
+        </TextInput>
           </Container>
           <Container>
               <Button2
@@ -55,13 +118,18 @@ export default class Login extends Component {
                   onPress={this.press.bind(this)} />
           </Container>
             <Container>
-          <Button
-              onPress={this.homepage.bind(this)}
-              title="Giriş Yap"
-              color="#00ffff"
-           />
+            <TouchableHighlight onPress={this.onLoginPressed.bind(this)} style={styles.button}>
+            <Text style={styles.buttonText}>
+              Giriş Yap
+            </Text>
+          </TouchableHighlight>
            </Container>
-          <Text> "miks" </Text>
+
+           <Text style={styles.error}>
+             {this.state.error}
+           </Text>
+
+
         </ScrollView>
       </View>
     );
@@ -94,6 +162,23 @@ const styles = StyleSheet.create({
     alignRight: {
       alignSelf: 'flex-end'
   },
+  buttonText: {
+   fontSize: 22,
+   color: '#008b8b',
+   alignSelf: 'center'
+ },
+ error: {
+    color: 'red',
+    paddingTop: 10
+  },
+  input: {
+   height: 50,
+   marginTop: 10,
+   padding: 4,
+   fontSize: 18,
+   borderWidth: 1,
+   borderColor: '#48bbec'
+ },
 });
 
 
