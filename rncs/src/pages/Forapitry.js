@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import Container from '../components/Container';
+import Button2 from '../components/Button';
+import Label from '../components/Label';
 
 import {
   StyleSheet,
@@ -50,8 +53,23 @@ export default class Forapitry extends Component {
         <Text style={styles.instructions}>
           Rover2 : {this.state.roverName2}
         </Text>
+
+        <Container>
+            <Button2
+                label="Login sayfasına dön"
+                styles={{button: styles.alignRight, label: styles.label}}
+                onPress={this.navigate.bind(this)} />
+        </Container>
       </View>
     );
+  }
+
+  navigate(){
+    this.props.navigator.push({
+      id:'Login',
+    });
+
+
   }
 }
 
