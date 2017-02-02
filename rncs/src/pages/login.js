@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Container from '../components/Container';
 import Button2 from '../components/Button';
 import Label from '../components/Label';
+import Db from '../../Db.json';
 import {
   StyleSheet,
   Text,
@@ -52,17 +53,15 @@ export default class Login extends Component {
   async onLoginPressed() {
       this.setState({showProgress: true})
       try {
-        let response = await fetch('https://afternoon-beyond-22141.herokuapp.com/api/login', {
+        let response = await fetch('http://192.168.1.233:8080/mobile', {
                                 method: 'POST',
                                 headers: {
                                   'Accept': 'application/json',
                                   'Content-Type': 'application/json',
                                 },
                                 body: JSON.stringify({
-                                  session:{
                                     email: this.state.email,
                                     password: this.state.password,
-                                  }
                                 })
                               });
         let res = await response.text();
@@ -70,9 +69,7 @@ export default class Login extends Component {
             //Handle success
             let accessToken = res;
             console.log(accessToken);
-            //On success we will store the access_token in the AsyncStorage
             this.storeToken(accessToken);
-            this.redirect('home');
         } else {
             //Handle error
             let error = res;
@@ -98,38 +95,35 @@ export default class Login extends Component {
                   label="Henüz hesabınız yok mu? Hemen Kayıt Olun."
                   styles={{button: styles.alignRight, label: styles.label}}
                   onPress={this.navigate.bind(this)} />
-          </Container>
-          <Container>
-          <TextInput
-          onChangeText={ (text)=> this.setState({email: text}) }
-          style={styles.input} placeholder="Email">
-        </TextInput>
-        <TextInput
-          onChangeText={ (text)=> this.setState({password: text}) }
-          style={styles.input}
-          placeholder="Password"
-          secureTextEntry={true}>
-        </TextInput>
-          </Container>
-          <Container>
+
+            <TextInput
+              onChangeText={ (text)=> this.setState({email: text}) }
+              style={styles.input} placeholder="Email">
+            </TextInput>
+
+            <TextInput
+              onChangeText={ (text)=> this.setState({password: text}) }
+              style={styles.input}
+              placeholder="Password"
+              secureTextEntry={true}>
+            </TextInput>
+
               <Button2
                   label="Şifremi unuttum"
                   styles={{button: styles.alignRight, label: styles.label}}
                   onPress={this.press.bind(this)} />
-          </Container>
-            <Container>
+
             <TouchableHighlight onPress={this.onLoginPressed.bind(this)} style={styles.button}>
             <Text style={styles.buttonText}>
               Giriş Yap
             </Text>
           </TouchableHighlight>
+
            </Container>
 
            <Text style={styles.error}>
              {this.state.error}
            </Text>
-
-
         </ScrollView>
       </View>
     );

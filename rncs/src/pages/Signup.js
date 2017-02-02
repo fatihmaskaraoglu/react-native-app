@@ -13,6 +13,8 @@ import {
   Image,
   Linking,
   navigator,
+  TouchableHighlight,
+  AsyncStorage,
   Link,
   ScrollView
 } from 'react-native';
@@ -20,6 +22,51 @@ import {
 
 
 export default class Signup extends Component {
+  constructor(){
+    super();
+
+    this.state = {
+      name: "",
+      pass: "",
+      code: "",
+
+    }
+  }
+  async onLoginPressed() {
+      this.setState({showProgress: true})
+      try {
+        let response = await fetch('http://192.168.1.233:8080/mobile', {
+                                method: 'POST',
+                                headers: {
+                                  'Accept': 'application/json',
+                                  'Content-Type': 'application/json',
+                                },
+                                body: JSON.stringify({
+                                    name : this.state.name,
+                                    pass: this.state.pass,
+                                    code: this.state.code,
+                                })
+                              });
+        let res = await response.text();
+        if (response.status >= 200 && response.status < 300) {
+            //Handle success
+            let accessToken = res;
+            console.log(accessToken);
+            //On success we will store the access_token in the AsyncStorage
+            this.storeToken(accessToken);
+            this.redirect('home');
+        } else {
+            //Handle error
+            let error = res;
+            throw error;
+        }
+      } catch(error) {
+          this.setState({error: error});
+          console.log("error " + error);
+          this.setState({showProgress: false});
+      }
+    }
+
   render() {
     return (
       <View style={{flex: 1}}>
@@ -30,10 +77,36 @@ export default class Signup extends Component {
          />
          <Container>
              <Button2
-                 label="API denemesine bak"
+                 label="3.page"
                  styles={{button: styles.alignRight, label: styles.label}}
                  onPress={this.navigate.bind(this)} />
+
+                 <TextInput
+                   onChangeText={ (text)=> this.setState({email: text}) }
+                   style={styles.input} placeholder="Name">
+                 </TextInput>
+
+                 <TextInput
+                   onChangeText={ (text)=> this.setState({password: text}) }
+                   style={styles.input}
+                   placeholder="Pass"
+                   secureTextEntry={true}>
+                 </TextInput>
+
+                 <TextInput
+                   onChangeText={ (text)=> this.setState({code: text}) }
+                   style={styles.input} placeholder="Kayıt Kodu">
+                 </TextInput>
+
          </Container>
+
+         <Container>
+         <TouchableHighlight onPress={this.onLoginPressed.bind(this)} style={styles.button}>
+         <Text style={styles.buttonText}>
+           Gönder
+         </Text>
+       </TouchableHighlight>
+        </Container>
         </ScrollView>
       </View>
     );
